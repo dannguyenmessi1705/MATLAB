@@ -7,7 +7,11 @@ epsilon = 0.000001;
 
 fa = f(a);
 fb = f(b);
-
+% Vi nghiem o khoang giua, lam cho f(mid) = 0 => 2 khoang a, b o bien trai va phai se
+% lam cho f(a) * f(b) luon nho hon 0
+if fa*fb > 0
+    disp('Phuong trinh vo nghiem');
+else
 while abs(b - a) > epsilon
     % Tim gia tri trung binh cua khoang [a, b]
     c = (a + b)/2;
@@ -27,7 +31,5 @@ while abs(b - a) > epsilon
         fb = fc;
     end
 end
-
 x = (a + b)/2;
-
 end
