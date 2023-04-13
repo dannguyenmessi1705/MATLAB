@@ -1,0 +1,17 @@
+fc = 300;
+fs = 1000;
+t0 = 0;
+tf = 1;
+t = t0:1/fs:1-1/fs;
+s = 2*cos(20*pi*t + pi/4)+cos(30*pi*t);
+sd = ammod(s, fc, fs);
+sg = amdemod(sd, fc, fs);
+subplot(3,1,1);
+plot(t, s);
+title('Tin hieu goc');
+subplot(3,1,2);
+plot(t, sd);
+title('Tin hieu dieu che');
+subplot(3,1,3);
+plot(t, sg);
+title('Tin hieu giai dieu che');

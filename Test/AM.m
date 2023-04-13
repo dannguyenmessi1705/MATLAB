@@ -1,0 +1,15 @@
+A = 2;
+f = 440;
+phi = -pi/4;
+m = 0.5;
+Ac = A/m;
+fc = 5e3;
+phi_c = 0;
+N = 2^9;
+T0 = 0;
+Tf = 5e-3;
+Ts = (Tf-T0)/(N-1);
+fs = 1/Ts;
+x = A*cos*(2*pi*f*t+phi);
+xc = Ac*cos(2*pi*f*t+phi_c);
+y = (1+x/Ac).*xc;

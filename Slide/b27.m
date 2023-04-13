@@ -1,16 +1,14 @@
-    clc;
-    clear all;
-    C = 4.7e-6; 
-    R = 10e3;
-    %Khoi tao dieu kien ban dau cua RK4
-    t1=0;
-    t2=3;
-    u(1)= 0;
-    x(1)=0;
-    h=3e-3;
-    N=(t2-t1)/h;
-    f1= @(u) (-1/(R*C))*u + 1/(R*C); %Ham su dung trong RK4
-    %Tim nghiem = cong thuc RK4
+C = 4.7e-6; 
+R = 10e3;
+%Khoi tao dieu kien ban dau cua RK4
+t1=0;
+t2=3;
+u(1)= 0;
+x(1)=0;
+h=3e-3;
+N=(t2-t1)/h;
+f1= @(u) (-1/(R*C))*u + 1/(R*C); %Ham su dung trong RK4
+%Tim nghiem = cong thuc RK4
     for i=1:N
         x(i+1)= x(i)+h/2;
         k1 = h* f1(u(i));

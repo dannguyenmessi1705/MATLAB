@@ -1,5 +1,3 @@
-clc;
-clear all;
 a = 1;
 r = 1;
 h = 0.25;
