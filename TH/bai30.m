@@ -1,4 +1,4 @@
-function isprime = bai30(N)
+function bai30(N)
 if N<0
     disp('So vua nhap la so am');
     return;

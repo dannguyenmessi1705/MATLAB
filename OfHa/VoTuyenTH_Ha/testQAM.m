@@ -1,0 +1,12 @@
+grid on;
+% Pe_BPSK;
+% axis ([ 0 30 1e-6 1e0]);
+% hold on;
+Pe_MQAM(4);
+axis ([ 0 30 1e-6 1e0]);
+hold on;
+Pe_MQAM(16);
+axis ([ 0 30 1e-6 1e0]);
+hold on;
+Pe_MQAM(64);
+axis ([ 0 30 1e-6 1e0]);

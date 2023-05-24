@@ -1,0 +1,13 @@
+EbNo_dB= -10:10;
+EbNo = 10.^(EbNo_dB/10);
+Pe = 2* qfunc(sqrt(2*EbNo));
+semilogy(EbNo_dB,Pe, 'linewidth',2);
+hold on;
+grid on;
+EbNo_s=[ -10 -8 -6 -4 -2 0 2 4 6 8 10];
+Pe_s=[0.5544 0.499 0.4265 0.3354 0.2446 0.1514 0.07395 0.02508 0.004843 0.000385 1.3e-5];
+semilogy(EbNo_s, Pe_s,'r--o','linewidth',2);
+legend('Ly thuyet','Mo phong');
+title('Khao sat BER theo li thuyet va mo phong cua OQPSK');
+xlabel('Eb/N0 [dB]');
+ylabel('log of BER');

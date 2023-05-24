@@ -6,6 +6,7 @@ for i=1:4
         end
     end
 end
+%% Cach 2
 clc;
 test1 = C < -10;
 test2 = C > 10;

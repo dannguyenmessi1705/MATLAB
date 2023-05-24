@@ -1,16 +1,19 @@
 a = 6; b = 8; c = 12;
-A = [a-c -b; c-a 2*b; a-3*c c];
+A = [a -b -c; c 2*b -a;a c -3*c];
 B = [10; 5; 2];
-[hang, cot] = size(A);
-if size(B) ~= hang
-    error('Kich thuoc A va B khong bang nhau')
-end
-if hang == cot
-    x = A^-1 * B;
-elseif hang<cot
-    x = pinv(A) * B;
+[col, row] = size(A);
+A1 = A;
+A1(:,1)=B;
+A2 = A;
+A2(:,2)=B;
+A3 = A;
+A3(:,3) = B;
+if det(A) == 0
+    disp('Phuong trinh vo nghiem hoac vo so nghiem');
 else
-    x = pinv(A) * B;
+    x1 = det(A1)/det(A);
+    x2 = det(A2)/det(A);
+    x3 = det(A3)/det(A);
 end
-disp('Nghiem cua pttt la');
-disp(x);
+disp('Nghiem cua phuong trinh la');
+disp([x1; x2; x3]);

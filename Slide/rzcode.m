@@ -1,14 +1,29 @@
-function [t,y] = rzcode(x, R)
-% x: Chuoi bit dau vao
-% R: Toc do bit
-T = 1/R; % Chu ky bit
-t = 0:T/1000:T-T/1000; % Thoi gian lay mau
-y = []; %Khoi tao xung dau ra
-for i=1:length(x)
-    if x(i) == 0
-        y = [y zeros(1, length(t))]; % Chu ky song RZ co gia tri bang 0
-    else
-        y = [y ones(1, length(t)/2) zeros(1, length(t)/2)]; % Chu ky song RZ co gia tri bang 1
-    end
-end
-plot(0:T/1000:length(y)*T/1000 - T/1000, y); % Tao vecto t = vecto y
+function [t,y,code] = rzcode(d,R,Ns) 
+% Chuong trinh ví d? ve ma duong truyen R
+% d   chuoi du lieu dau vao 
+% R   toc do du lieu 
+% Ns   so luong mau 
+% t    vecto thoi gian 
+% y    vecto mau tín hieu 
+
+Tb = 1/R;  % chu ki bit 
+Nb = length(d);  % do dai chuoi bit 
+Timewindow = Nb*Tb; % thoi gian cua so 
+ts = Timewindow/(Ns-1); % thoi gian lay mau 
+t = 0:ts:Timewindow; % vecto thoi gian 
+
+y = zeros(size(t)); % tao vecto y toan so 0
+code = [];% khoi tao vecto ma
+
+for k = 1:Ns 
+    n = fix(t(k)/Tb)+1; % lay phan nguyen cua t(k)/Tb cong them 1
+if n >= Nb 
+        n = Nb; 
+end;
+if mod(t(k),Tb)<=Tb/2 % lay phan du cua t(k)/Tb so sanh voi Tb/2
+        y(k) = d(n); 
+        code(n) = d(n); 
+else
+        y(k) = 0; 
+end;
+end;

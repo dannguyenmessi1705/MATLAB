@@ -12,7 +12,7 @@ fb = f(b);
 if fa*fb > 0
     disp('Phuong trinh vo nghiem');
 else
-while abs(b - a) > epsilon
+while b - a > epsilon*b
     % Tim gia tri trung binh cua khoang [a, b]
     c = (a + b)/2;
     fc = f(c);
@@ -31,5 +31,5 @@ while abs(b - a) > epsilon
         fb = fc;
     end
 end
-x = (a + b)/2;
+x = c;
 end
