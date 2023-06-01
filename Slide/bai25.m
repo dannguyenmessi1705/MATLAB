@@ -1,4 +1,4 @@
-function [y] = bai25( t1,t2,h )
+  function [y] = bai25( t1,t2,h )
 a=1;
 r=1;
 N=(t2-t1)/h;

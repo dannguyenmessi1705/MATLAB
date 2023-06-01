@@ -1,9 +1,10 @@
-d = [1 1 0 0 1 0 1 1 0 0 1 0 1 0 1 1 1 1 1 1 1 0 0 1 0 1 1 0]; 
-R = 6e3; 
-Ns =20; 
+d = [0 0 1 1 0 0 1 1 1 1 1 1 0 1 0 1]; 
+R = 1e7; 
+Ns = 16; 
 [t,y,code] = amicode(d,R,Ns);
 stairs(t,y);
 ylim([-2 2]);
+grid on;
 
 function [t,y,code] = amicode(d,R,Ns)
 % Chuong trinh vi du ve ma AMI
@@ -20,7 +21,7 @@ ts = Timewindow/(Ns-1); % sampling time
 t = 0:ts:Timewindow; % time vector
 y= zeros(size(t));
 code = zeros(size(d));
-prev = 0; % Bien luu cac gia tri truoc do
+prev = 1; % Bien luu cac gia tri truoc do
 for k = 1:Ns
     n = fix(t(k)/Tb)+1;
     if n >= Nb
@@ -28,16 +29,15 @@ for k = 1:Ns
     end
     if d(n) == 0
         y(k) = 0;
-        code(n) = 0;
+        code(k) = 0;
     else
-        if prev == 0
+        prev = prev + 1;
+        if mod(prev,2)==0
             y(k) = 1;
-            code(n) = 1;
-            prev = 1;
+            code(k) = 1;
         else
             y(k) = -1;
-            code(n) = -1;
-            prev = 0;
+            code(k) = -1;
         end
     end
 end
