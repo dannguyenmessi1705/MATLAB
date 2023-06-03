@@ -1,23 +1,28 @@
-% Thi?t l?p các thông s?
-T = 1;      % Chu k? T
-gamma = T/2;    % Giá tr? gamma
-N = 10;     % S? chu k? ð? v? ð? th?
-t = 0:T/100:(N*T-T/100);    % M?ng th?i gian
+Ns = 2^9;
+t0 = -6;
+tf = 6;
+ts = (tf-t0)/(Ns-1);
+t = t0:ts:tf;
+x = exp(t);
+plot(t,x,'b');
+hold on;
+title('Tin hieu truoc va sau luong tu hoa');
+[code, xq, sqnr] = PCM(x, 16);
+plot(t,xq,'r');
 
-% T?o tín hi?u nh? phân bãng g?c ng?u nhiên
-x = zeros(size(t));    % Kh?i t?o m?ng tín hi?u
-Ak = [1 0 1 0 0 1 1 0 0 1];   % Chu?i bit truy?n thông
-for k = -N:N
-    x = x + Ak(mod(k,length(Ak))+1)*p(T/2,t-gamma-k*T);
+function [code, xq, sqnr] = PCM(x, M)
+Nb = log2(M);
+Amax = max(abs(x));
+delta = 2*Amax/(M-1);
+Mq = -Amax:delta:Amax;
+Ml = 0:(M-1);
+xq = zeros(size(x));
+xcode = xq;
+for i=1:M
+    ind = find(x > Mq(i)-delta/2 & x <= Mq(i)+delta/2);
+    xq(ind) = Mq(i);
+    xcode(ind) = Ml(i);
 end
-
-% V? ð? th? tín hi?u
-plot(t,x);
-xlabel('Th?i gian');
-ylabel('Tín hi?u');
-title('Tín hi?u nh? phân bãng g?c ng?u nhiên v?i gamma = T/2 và l?p l?i chu k? T/2 l?n');
-
-% Hàm xung p(t) có chu k? T/2 và ð? r?ng xung b?ng 1
-function y = p(T,t)
-    y = rectpuls(t-T/4,T/2);
+sqnr = 20*log10(norm(x)/norm(x-xq));
+code = de2bi(xcode, Nb, 'left-msb');
 end

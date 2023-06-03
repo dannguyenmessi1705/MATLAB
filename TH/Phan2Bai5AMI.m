@@ -1,44 +1,36 @@
-d = [0 0 1 1 0 0 1 1 1 1 1 1 0 1 0 1]; 
-R = 1e7; 
-Ns = 16; 
-[t,y,code] = amicode(d,R,Ns);
-stairs(t,y);
-ylim([-2 2]);
+d = [1 1 0 0 1 0 1 1 0 0 1 0 1 0 1 1 1 1 1 1 1 0 0 1 0 1 1 0]; 
+Rb = 1e6;
+[t,y,code] = amicode(d,Rb);
+plot(t,y);
+ylim([-1.5 1.5]);
 grid on;
+title('Chuoi AMI');
 
-function [t,y,code] = amicode(d,R,Ns)
-% Chuong trinh vi du ve ma AMI
-% d - the data sequence
-% R - the data rate
-% Ns - the number of samples
-% t - the time vector output
-% y - the vector output of the pulse samples
-% code - the AMI code
-Tb = 1/R; % bit period
-Nb = length(d); % number of bits
-Timewindow = Nb*Tb; % time window
-ts = Timewindow/(Ns-1); % sampling time
-t = 0:ts:Timewindow; % time vector
-y= zeros(size(t));
-code = zeros(size(d));
-prev = 1; % Bien luu cac gia tri truoc do
-for k = 1:Ns
-    n = fix(t(k)/Tb)+1;
-    if n >= Nb
-        n = Nb;
-    end
-    if d(n) == 0
-        y(k) = 0;
-        code(k) = 0;
+function [t,y,code] = amicode(d,Rb)
+Tb = 1/Rb;
+Nsb = 50;
+Nb = length(d);
+ts = Tb/Nsb;
+Ns = Nb*Nsb;
+Timewindow = (Ns-1)*ts;
+t = 0:ts:Timewindow;
+y= [];
+code = [];
+dem = 1;
+for k = 1:Nb
+    if d(k) == 0
+        sig = zeros(1, Nsb);
+        code = [code 0];
     else
-        prev = prev + 1;
-        if mod(prev,2)==0
-            y(k) = 1;
-            code(k) = 1;
+        if mod(dem,2)==1
+            sig = ones(1, Nsb);
+            code = [code 1];
         else
-            y(k) = -1;
-            code(k) = -1;
+            sig = -1 * ones(1, Nsb);
+            code = [code -1];
         end
+        dem = dem+1;
     end
+    y = [y sig];
 end
 end

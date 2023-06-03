@@ -3,7 +3,6 @@ M = 16; % Bac dieu che
 k = log2(M); % So bit tren moi mau tin hieu
 N = 48*50; % So mau tin hieu
 SNR = 16; % SNR (dB)
-a = random_string - '0';
 symbols = randi([0 M-1], [1 N]); % Chuoi cac mau tin hieu ngau nhien
 
 % Dieu che tin hieu M-PSK

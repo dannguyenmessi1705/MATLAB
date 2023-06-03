@@ -1,19 +1,29 @@
-% Thiet lap thong so cua tin hieu
-x = -8:0.001:8; % Tao vector x
-y = exp(x); % Tao tin hieu y
-
-% Ve tin hieu truoc khi luong tu hoa
-plot(x,y);
-title('Tin hieu');
-xlabel('x');
-ylabel('y');
+Ns = 1e5;
+t0 = -6;
+tf = 6;
+ts = (tf-t0)/(Ns-1);
+t = t0:ts:tf;
+x = exp(t);
+plot(t,x,'b');
 hold on;
-axis([4 6 150 500]);
-% Thuc hien luong tu hoa
-L = 8; % So bit luong tu
-delta = (max(y)-min(y))/(2^L); % Tinh bac cua luong tu
-y_quantized = round(y/delta)*delta; % Luong tu hoa tin hieu y
-
-% Ve tin hieu sau khi luong tu hoa
-plot(x,y_quantized);
+title('Tin hieu truoc va sau luong tu hoa');
+[code, xq, sqnr] = PCM(x, 16);
+plot(t,xq,'r');
 legend('Tin hieu truoc khi luong tu hoa', 'Tin hieu sau khi luong tu hoa');
+
+function [code, xq, sqnr] = PCM(x, M)
+Nb = log2(M);
+Amax = max(abs(x));
+delta = 2*Amax/(M-1);
+Mq = -Amax:delta:Amax;
+Ml = 0:(M-1);
+xq = zeros(size(x));
+xcode = xq;
+for i=1:M
+    ind = find(x > Mq(i)-delta/2 & x <= Mq(i)+delta/2);
+    xq(ind) = Mq(i);
+    xcode(ind) = Ml(i);
+end
+sqnr = 20*log10(norm(x)/norm(x-xq));
+code = de2bi(xcode, Nb, 'left-msb');
+end
