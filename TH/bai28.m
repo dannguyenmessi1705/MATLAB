@@ -1,6 +1,6 @@
 function y = bai28(b, T)
 N = b+2; % So xung
-%T chu ki xung
+%T chu ki xung,
 %fs tan so xung
 fs = 1/T * 100;
 Tw=T/2;
