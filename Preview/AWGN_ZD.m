@@ -10,6 +10,6 @@ P0 = var(yClean)/SNR; % Tinh phuong sai nhieu
 if isreal(yClean) % Neu tin hieu vao khong phai la tin hieu phuc
     yNoise = yClean + sqrt(P0)*randn(size(yClean));
 else % Nguoc lai tin hieu vao la tin hieu phuc
-    yNoise = yClean + sqrt(P0)*randn(size(yClean))+1i*randn(size(yClean));
+    yNoise = yClean + sqrt(P0/2)*(randn(size(yClean))+1i*randn(size(yClean)));
 end
 end
