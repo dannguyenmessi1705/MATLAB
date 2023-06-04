@@ -13,23 +13,26 @@ t = t0:ts:tf; % time vector
 s = a * cos(2*pi*f*t + b); % Tin hieu goc
 c = b * sin(2*pi*fc*t + b); % Song mang
 % Dieu che PM
-m = 0.5;
+m = 1.5;
 pdev = pi*m; % He so do bien thien tan so
-ydc =  b * cos(2*pi*fc*t + pdev*c);
+ydc =  b * sin(2*pi*fc*t + 3.*s + pdev + b);
 subplot(3, 1, 1);
 plot(t, s);
 title('Tin hieu goc');
 xlabel('Thoi gian');
 ylabel('Bien do');
+xlim([0 0.4e-3]);
 
 subplot(3, 1, 2);
 plot(t, c);
 title('Song mang');
 xlabel('Thoi gian');
 ylabel('Bien do');
+xlim([0 0.4e-3]);
 
 subplot(3, 1, 3);
 plot(t, ydc);
 title('Tin hieu dieu che PM');
 xlabel('Thoi gian');
 ylabel('Bien do');
+xlim([0 0.4e-3]);

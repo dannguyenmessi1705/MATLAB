@@ -15,9 +15,9 @@ s = 8 * cos(2*pi*f*t + b); % Tin hieu goc
 c = 6 * sin(2*pi*fc*t + b); % Song mang
 plot(t,c);
 % Ðieu che FM
-fm = kf * s; % Tan so bien thien FM
+fm = kf * f; % Tan so bien thien FM
 
-FM = cos(2*pi*fc*t + cumsum(fm)); % Tin hieu ðieu che FM
+FM = b*sin(2*pi*fc*t + ((fc-f)/fm).*s);
 
 subplot(3, 1, 1);
 plot(t, s);

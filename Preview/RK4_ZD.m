@@ -9,6 +9,7 @@ t0 = 1;
 tf = 2;
 N = (tf-t0)/h;
 y(1) = 0;
+t(1) = t0;
 for i=1:N
     t(i+1) = t(i) + h;
     k1 = h * f(t(i), y(i));
