@@ -17,7 +17,7 @@ plot(t,c);
 % Ðieu che FM
 fm = kf * f; % Tan so bien thien FM
 
-FM = b*sin(2*pi*fc*t + ((fc-f)/fm).*s);
+FM = b*sin(2*pi*fc*t + ((fc-f)/fm).*s + b);
 
 subplot(3, 1, 1);
 plot(t, s);

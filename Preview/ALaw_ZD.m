@@ -13,7 +13,7 @@ plot(t, x);
 grid on;
 title('Tin hieu truoc khi luong tu hoa');
 subplot(223);
-y = compand(x,255,max(x),'A/compressor');
+y = compand(x,87.6,max(x),'A/compressor');
 plot(t,y,'b');
 hold on;
 [code, yq, ~] = PCM(y, M); % ma hoa, luong tu hoa tin hieu
@@ -21,7 +21,7 @@ plot(t,yq,'r');
 grid on;
 title('Tin hieu nen va duoc luong tu hoa');
 subplot(224);
-xq = compand(yq,255,max(yq),'A/expander');
+xq = compand(yq,87.6,max(yq),'A/expander');
 sqnr = 20*log10(norm(x)/norm(x-xq)); % Tinh ti so tin hieu nhieu theo cong thuc
 plot(t,x,'b');
 hold on;

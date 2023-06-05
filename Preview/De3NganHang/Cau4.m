@@ -36,7 +36,7 @@ stc= st_filter.* exp(1i*2*pi*fc*t);
 N0=8;
 N0= 10^(N0/10);
 snr= Es/N0- 10*log10(Nsamp);
-snr= 10^(snr/10);
+% snr= 10^(snr/10);
 dataNoisy= awgn(modData, snr, 'measured');
 Noisy= awgn(stc,snr,'measured');
 % Bo loc phia thu
